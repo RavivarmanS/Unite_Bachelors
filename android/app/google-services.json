@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "773396023039",
+    "project_id": "unite-bachelors-0210",
+    "storage_bucket": "unite-bachelors-0210.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773396023039:android:dfdb48ab0905d2f076aeca",
+        "android_client_info": {
+          "package_name": "com.example.unitebachelors"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773396023039-horfc4ejorgek12m0cah990pp10sc8rj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqGkUh9jW0m8K3xoUzzeFimcYExXoZO-A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "773396023039-horfc4ejorgek12m0cah990pp10sc8rj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
