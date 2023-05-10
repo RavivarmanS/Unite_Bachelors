@@ -1,10 +1,9 @@
-
-import 'dart:async';
+import 'dart:io';
 import 'package:file/file.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 void main() => runApp(owner());
 
@@ -45,24 +44,15 @@ class HouseDetails extends StatefulWidget {
 class _HouseDetailsState extends State<HouseDetails> {
   bool checkboxcar=false;
   bool checkboxbike=false;
-  // PlatformFile? pickedfile;
+  late Future <File> imageFile;
 
-  // Future selectfile() async{
-  // final result=await FilePicker.platform.pickFiles();
-  // if(result==null)return;
-  // setState(() {
-  //   pickedfile=result.files.first;
-  // });
-  // }
-  // Future uploadfile() async{
-  //   final path='files/${pickedfile!.name}';
-  //   // final file= File(pickedfile!.path);
-  //
-  //   final ref=FirebaseStorage.instance.ref().child(path);
-  //   ref.putFile(pickedfile!.path as File);
-  // }
+  pickImage(ImageSource source){
+    imageFile=ImagePicker().pickImage(source: source) as Future<File>;
+  }
 
-
+  Widget? showImage(){
+    return null;
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -125,6 +115,28 @@ class _HouseDetailsState extends State<HouseDetails> {
             ),
           ),
           Container(
+            padding: EdgeInsets.fromLTRB(10,10,10,0),
+            child: TextField(
+              obscureText: true,
+              controller: null,
+              decoration: InputDecoration(
+                  labelText: 'Mobile No.',
+                  border: OutlineInputBorder()
+              ),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.fromLTRB(10,10,10,0),
+            child: TextField(
+              obscureText: true,
+              controller: null,
+              decoration: InputDecoration(
+                  labelText: 'Landmarks',
+                  border: OutlineInputBorder()
+              ),
+            ),
+          ),
+          Container(
 
             padding: EdgeInsets.fromLTRB(10,10,10,0),
             child: Text("Parking",style: TextStyle(fontSize: 15),)
@@ -160,44 +172,56 @@ class _HouseDetailsState extends State<HouseDetails> {
                     fontSize: 20.0,
                   ),
                 ),
-
               ],
             ),
           ),
           Container(
-            padding: EdgeInsets.only(top: 20.0),
-            child: ElevatedButton(
-              onPressed: null,
-              child: const Text(
-                  "Upload photos"
-              ),
+            padding: EdgeInsets.fromLTRB(10,10,10,0),
+            child: TextField(
+              keyboardType: TextInputType.multiline,
+              minLines: 5,//Normal textInputField will be displayed
+              maxLines: 10,
+              decoration: InputDecoration(
+                labelText: 'Description',
+                  border: OutlineInputBorder(),
 
+              ),
+            ),
+          ),
+          // Container(
+          //   padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+          //   child: Text('Selected'),
+          // ),
+          Container(
+            padding: EdgeInsets.fromLTRB(10,10,10,0),
+            child: ElevatedButton(
+                onPressed: ()=>uploadImage(),
+                child: Text(
+                  'Upload Image'
+            )
             ),
           ),
           Container(
-            padding: EdgeInsets.only(top: 20.0),
+            padding: EdgeInsets.fromLTRB(10,20,10,0),
             child: ElevatedButton(
-              onPressed: null,
-              child: const Text(
-                  "submit"
-              ),
-
+                onPressed: ()=>null,
+                child: Text(
+                    'Submit'
+                )
             ),
-
           ),
-          // Container(
-          //   color: Colors.blue[100],
-          //   child:Center(
-          //     child: Text(
-          //       pickedfile!.name,
-          //
-          //     ),
-          //   ),
-          //
-          // )
-
         ],
       ),
     );
   }
 }
+
+Future uploadImage() async{
+
+
+  final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+  if(image==null) return;
+
+}
+
+

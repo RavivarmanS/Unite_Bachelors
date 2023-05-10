@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         floatingActionButton: FloatingActionButton(
             onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>const owner()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => owner()));
             },
             backgroundColor:  const Color.fromARGB(200, 41, 164, 172),
           child: const Icon(Icons.add),
