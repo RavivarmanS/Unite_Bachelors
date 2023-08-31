@@ -16,6 +16,15 @@ class BikeRental extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
+          leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black54,
+          ),
+        ),
         ),
           body:Center(
             child: Text('Bike Rental',style: TextStyle(fontSize: 20.0),

@@ -2,12 +2,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:unitebachelors/upload.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'Main_drawer.dart';
 import 'package:geolocator/geolocator.dart';
 
 import 'google.dart';
-import 'owner.dart';
+
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -121,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         floatingActionButton: FloatingActionButton(
             onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => owner()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Upload()));
             },
             backgroundColor:  const Color.fromARGB(200, 41, 164, 172),
           child: const Icon(Icons.add),

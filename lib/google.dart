@@ -13,17 +13,7 @@ class googleLogin extends StatelessWidget{
   Widget build(BuildContext context) {
     return SafeArea(
       child:Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text("Login",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            backgroundColor: Color.fromARGB(200, 41, 164, 172),
-          ),
+
             body: LogIn(),
         ),
     );
@@ -41,6 +31,26 @@ class LogIn extends StatelessWidget{
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text("Login",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            backgroundColor: Color.fromARGB(200, 41, 164, 172),
+            leading: InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black54,
+              ),
+            ),
+          ),
           body: Center(
             child: Column(
               children: [

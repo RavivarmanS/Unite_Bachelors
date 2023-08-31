@@ -1,6 +1,8 @@
 import 'dart:io';
-import 'package:file/file.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:file/file.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -44,15 +46,9 @@ class HouseDetails extends StatefulWidget {
 class _HouseDetailsState extends State<HouseDetails> {
   bool checkboxcar=false;
   bool checkboxbike=false;
-  late Future <File> imageFile;
 
-  pickImage(ImageSource source){
-    imageFile=ImagePicker().pickImage(source: source) as Future<File>;
-  }
 
-  Widget? showImage(){
-    return null;
-  }
+  String imageUrl='';
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -195,18 +191,18 @@ class _HouseDetailsState extends State<HouseDetails> {
           Container(
             padding: EdgeInsets.fromLTRB(10,10,10,0),
             child: ElevatedButton(
-                onPressed: ()=>uploadImage(),
+                onPressed:uploadImage,
                 child: Text(
-                  'Upload Image'
+                  'Select Image'
             )
             ),
           ),
           Container(
             padding: EdgeInsets.fromLTRB(10,20,10,0),
             child: ElevatedButton(
-                onPressed: ()=>null,
+                onPressed:submitImage,
                 child: Text(
-                    'Submit'
+                    'Upload Image'
                 )
             ),
           ),
@@ -214,14 +210,63 @@ class _HouseDetailsState extends State<HouseDetails> {
       ),
     );
   }
+  // PlatformFile? pickedFile;
+  // UploadTask? uploadTask;
+  //  Future selectFile() async{
+  //   final result=await FilePicker.platform.pickFiles();
+  //   if(result==null) return;
+  //
+  //   setState(() {
+  //     pickedFile=result.files.first;
+  //   });
+  // }
+  // Future uploadFile()async{
+  //    final path ='images/${pickedFile!.name}';
+  //    final file = pickedFile!.name as File;
+  //
+  //
+  //    final ref = FirebaseStorage.instance.ref().child(path);
+  //    uploadTask=ref.putFile(file);
+  //    final snapshot= await uploadTask!.whenComplete(() {});
+  //
+  //    final urlDownload= await snapshot.ref.getDownloadURL();
+  //    print('Download Link:$urlDownload');
+  //
+  // }
+
+
+  submitImage() async{
+
+  }
+
+
+Future uploadImage() async {
+
+  // final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+  // if(image==null) return;
+  ImagePicker imagePicker = ImagePicker();
+  XFile? file = await imagePicker.pickImage(source: ImageSource.camera);
+  print('${file?.path}');
+
+  if (file == null) return;
+  String uniqueFileName = DateTime
+      .now()
+      .millisecondsSinceEpoch
+      .toString();
+
+  Reference referenceRoot = FirebaseStorage.instance.ref();
+  Reference referenceDirImage = referenceRoot.child('images');
+
+  Reference referenceUploadImage = referenceDirImage.child(uniqueFileName);
+
+  try {
+    await referenceUploadImage.putFile(file!.path as File);
+    imageUrl=await referenceUploadImage.getDownloadURL();
+  } catch (error) {
+    //some error
+  }
+}
 }
 
-Future uploadImage() async{
-
-
-  final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-  if(image==null) return;
-
-}
 
 
